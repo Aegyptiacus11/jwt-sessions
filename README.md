@@ -3,9 +3,9 @@
 First-party authentication for a FastAPI API and a React front end, as two
 packages that implement one contract:
 
-- **`tandem-auth` on PyPI** - password sign-in, short-lived access tokens, and
+- **the Python package** (`python/`) - password sign-in, short-lived access tokens, and
   refresh tokens that rotate on every use and give themselves away when stolen.
-- **`tandem-auth` on npm** - the React side: the session, sign-in and sign-out,
+- **the JavaScript package** (`js/`) - the React side: the session, sign-in and sign-out,
   renewal before expiry, and one refresh on a 401.
 
 It is for applications that own their users and do not want an identity
@@ -13,7 +13,7 @@ provider: one API, one front end, email and password. Authorization - who may
 do what - is deliberately not here; it belongs to the application.
 
 > Status: pre-release (`0.1.0.dev0`). Extracted from a production application,
-> but the API may still change before 0.1.0. License not chosen yet.
+> but the API may still change before 0.1.0. MIT licensed.
 
 ## The contract
 
@@ -60,9 +60,21 @@ nothing that can be presented.
 - A deactivated account's session ends at its next refresh; its current access
   token runs out within the access TTL.
 
+## Installing
+
+Not on PyPI or npm yet - install from this repository, pinned to a commit:
+
+```bash
+# Python (uv; pip takes the same URL)
+uv add "tandem-auth[fastapi,sqlalchemy] @ git+https://github.com/Aegyptiacus11/tandem-auth@<commit>#subdirectory=python"
+
+# JavaScript (pnpm builds it on install)
+pnpm add "tandem-auth@github:Aegyptiacus11/tandem-auth#<commit>&path:/js"
+```
+
 ## Using it
 
-**Python** (`pip install tandem-auth[fastapi,sqlalchemy]`):
+**Python**:
 
 ```python
 from tandem_auth import AccessTokens, Auth, RefreshTokens
@@ -81,7 +93,7 @@ current_claims = bearer_claims(auth)                # a dependency
 
 `python/examples/demo_app.py` is a complete, runnable one.
 
-**React** (`npm install tandem-auth`):
+**React**:
 
 ```tsx
 import { AuthProvider, tandemServer, useSession } from "tandem-auth";

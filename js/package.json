@@ -23,7 +23,8 @@
     "test": "vitest run",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
-    "test:e2e": "vitest run --config vitest.e2e.config.ts"
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "prepare": "tsc -p tsconfig.build.json"
   },
   "peerDependencies": {
     "@tanstack/react-router": ">=1.95",
@@ -47,5 +48,6 @@
     "typescript": "^7.0.2",
     "vitest": "^5.0.2"
   },
-  "packageManager": "pnpm@11.15.1"
+  "packageManager": "pnpm@11.15.1",
+  "license": "MIT"
 }

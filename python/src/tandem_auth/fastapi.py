@@ -13,7 +13,8 @@ cookie alone. The refresh cookie is SameSite=Lax by default: a cross-site
 POST does not carry it, and nothing a cross-site page could make the
 browser send gets it an access token it could read.
 
-The client that speaks this contract is the npm package `tandem-auth`.
+The client that speaks this contract is the JavaScript package in this
+repository's `js/`.
 """
 
 from __future__ import annotations

@@ -4,6 +4,8 @@ version = "0.1.0.dev0"
 description = "First-party JWT auth for FastAPI with rotating, reuse-detecting refresh tokens, and the React client that speaks the same contract."
 readme = "README.md"
 requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
 dependencies = [
     "pyjwt>=2.8",
     "pwdlib[argon2]>=0.2",
