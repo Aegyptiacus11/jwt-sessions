@@ -6,9 +6,6 @@ on:
 jobs:
   python:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: python
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -16,38 +13,3 @@ jobs:
       - run: uv run ruff format --check .
       - run: uv run ruff check .
       - run: uv run pytest -q
-
-  js:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: js
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run format:check
-      - run: pnpm run typecheck
-      - run: pnpm test
-      - run: pnpm run build
-
-  # The two packages against each other: the Python demo app, driven by the
-  # JS client over HTTP.
-  contract:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: uv sync --locked
-        working-directory: python
-      - run: pnpm install --frozen-lockfile
-        working-directory: js
-      - run: pnpm run test:e2e
-        working-directory: js

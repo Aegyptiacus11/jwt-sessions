@@ -1,5 +1,4 @@
-"""The smallest application using tandem-auth - and the server the
-cross-language contract test (`js/e2e/`) runs against.
+"""The smallest application using tandem-auth.
 
     uv run uvicorn examples.demo_app:app --port 8000
 
