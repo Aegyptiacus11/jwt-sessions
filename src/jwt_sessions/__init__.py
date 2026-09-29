@@ -1,10 +1,10 @@
 """First-party JWT auth with rotating, reuse-detecting refresh tokens."""
 
-from tandem_auth.core import Auth, AuthUser, InvalidCredentials, Session, UserStore
-from tandem_auth.memory import InMemoryRefreshStore
-from tandem_auth.passwords import check_password, hash_password, needs_rehash
-from tandem_auth.refresh import RefreshRejected, RefreshStore, RefreshTokens
-from tandem_auth.tokens import AccessTokens, InvalidToken
+from jwt_sessions.core import Auth, AuthUser, InvalidCredentials, Session, UserStore
+from jwt_sessions.memory import InMemoryRefreshStore
+from jwt_sessions.passwords import check_password, hash_password, needs_rehash
+from jwt_sessions.refresh import RefreshRejected, RefreshStore, RefreshTokens
+from jwt_sessions.tokens import AccessTokens, InvalidToken
 
 __all__ = [
     "AccessTokens",

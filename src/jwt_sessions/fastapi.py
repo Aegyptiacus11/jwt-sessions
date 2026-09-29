@@ -27,9 +27,9 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel, Field
 
-from tandem_auth.core import Auth, InvalidCredentials
-from tandem_auth.refresh import RefreshRejected
-from tandem_auth.tokens import InvalidToken
+from jwt_sessions.core import Auth, InvalidCredentials
+from jwt_sessions.refresh import RefreshRejected
+from jwt_sessions.tokens import InvalidToken
 
 
 @dataclass(frozen=True)

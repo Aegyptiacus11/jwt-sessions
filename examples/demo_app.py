@@ -1,4 +1,4 @@
-"""The smallest application using tandem-auth.
+"""The smallest application using jwt-sessions.
 
     uv run uvicorn examples.demo_app:app --port 8000
 
@@ -14,7 +14,7 @@ from typing import Any
 
 from fastapi import Depends, FastAPI
 
-from tandem_auth import (
+from jwt_sessions import (
     AccessTokens,
     Auth,
     AuthUser,
@@ -22,7 +22,7 @@ from tandem_auth import (
     RefreshTokens,
     hash_password,
 )
-from tandem_auth.fastapi import CookieSettings, auth_router, bearer_claims
+from jwt_sessions.fastapi import CookieSettings, auth_router, bearer_claims
 
 USERS = {
     "ada@example.com": AuthUser(
@@ -53,7 +53,7 @@ auth = Auth(
 )
 current = bearer_claims(auth)
 
-app = FastAPI(title="tandem-auth demo")
+app = FastAPI(title="jwt-sessions demo")
 # Plain HTTP on localhost: a Secure cookie would never be sent back.
 app.include_router(
     auth_router(auth, cookie=CookieSettings(secure=False)), prefix="/api"

@@ -7,7 +7,7 @@ import asyncio
 from dataclasses import dataclass, replace
 from datetime import datetime
 
-from tandem_auth.refresh import RefreshRecord
+from jwt_sessions.refresh import RefreshRecord
 
 
 @dataclass

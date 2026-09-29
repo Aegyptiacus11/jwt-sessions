@@ -7,7 +7,7 @@ import pytest
 from fastapi import Depends, FastAPI
 from httpx import ASGITransport, AsyncClient
 
-from tandem_auth import (
+from jwt_sessions import (
     AccessTokens,
     Auth,
     AuthUser,
@@ -15,7 +15,7 @@ from tandem_auth import (
     RefreshTokens,
     hash_password,
 )
-from tandem_auth.fastapi import CookieSettings, auth_router, bearer_claims
+from jwt_sessions.fastapi import CookieSettings, auth_router, bearer_claims
 from tests.conftest import SECRET
 
 

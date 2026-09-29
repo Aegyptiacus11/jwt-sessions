@@ -1,4 +1,4 @@
-# tandem-auth
+# jwt-sessions
 
 First-party authentication for FastAPI: email and password sign-in,
 short-lived access tokens, and refresh tokens that rotate on every use and
@@ -16,7 +16,7 @@ belongs to the application.
 Not on PyPI - install from this repository, pinned to a commit:
 
 ```bash
-uv add "tandem-auth[fastapi,sqlalchemy] @ git+https://github.com/Aegyptiacus11/tandem-auth@<commit>"
+uv add "jwt-sessions[fastapi,sqlalchemy] @ git+https://github.com/Aegyptiacus11/jwt-sessions@<commit>"
 ```
 
 (`pip install` takes the same URL.)
@@ -24,9 +24,9 @@ uv add "tandem-auth[fastapi,sqlalchemy] @ git+https://github.com/Aegyptiacus11/t
 ## Using it
 
 ```python
-from tandem_auth import AccessTokens, Auth, RefreshTokens
-from tandem_auth.fastapi import auth_router, bearer_claims
-from tandem_auth.sqlalchemy_store import SQLAlchemyRefreshStore, refresh_tables
+from jwt_sessions import AccessTokens, Auth, RefreshTokens
+from jwt_sessions.fastapi import auth_router, bearer_claims
+from jwt_sessions.sqlalchemy_store import SQLAlchemyRefreshStore, refresh_tables
 
 families, tokens = refresh_tables(Base.metadata)  # on your own metadata
 auth = Auth(

@@ -2,7 +2,7 @@
 things an application supplies, where its users are (`UserStore`) and where
 refresh tokens are kept (`RefreshStore`).
 
-Framework-free; `tandem_auth.fastapi` puts it behind HTTP.
+Framework-free; `jwt_sessions.fastapi` puts it behind HTTP.
 """
 
 from __future__ import annotations
@@ -12,9 +12,9 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Protocol
 
-from tandem_auth.passwords import check_password
-from tandem_auth.refresh import RefreshRejected, RefreshTokens
-from tandem_auth.tokens import AccessTokens
+from jwt_sessions.passwords import check_password
+from jwt_sessions.refresh import RefreshRejected, RefreshTokens
+from jwt_sessions.tokens import AccessTokens
 
 
 @dataclass(frozen=True)

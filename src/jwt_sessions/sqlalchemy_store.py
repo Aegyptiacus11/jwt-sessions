@@ -29,10 +29,10 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
-from tandem_auth.refresh import RefreshRecord
+from jwt_sessions.refresh import RefreshRecord
 
 
-def refresh_tables(metadata: MetaData, prefix: str = "tandem_") -> tuple[Table, Table]:
+def refresh_tables(metadata: MetaData, prefix: str = "auth_") -> tuple[Table, Table]:
     families = Table(
         f"{prefix}refresh_families",
         metadata,

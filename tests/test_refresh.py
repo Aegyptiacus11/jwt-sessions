@@ -5,8 +5,8 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 
-from tandem_auth import RefreshRejected, RefreshTokens
-from tandem_auth.refresh import token_hash
+from jwt_sessions import RefreshRejected, RefreshTokens
+from jwt_sessions.refresh import token_hash
 
 T0 = datetime(2026, 1, 1, 12, 0, tzinfo=UTC)
 

@@ -4,8 +4,8 @@ import pytest
 from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from tandem_auth import InMemoryRefreshStore
-from tandem_auth.sqlalchemy_store import SQLAlchemyRefreshStore, refresh_tables
+from jwt_sessions import InMemoryRefreshStore
+from jwt_sessions.sqlalchemy_store import SQLAlchemyRefreshStore, refresh_tables
 
 SECRET = "test-secret-that-is-comfortably-over-32-bytes"
 

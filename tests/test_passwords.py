@@ -1,4 +1,4 @@
-from tandem_auth import check_password, hash_password, passwords
+from jwt_sessions import check_password, hash_password, passwords
 
 
 def test_check_password():

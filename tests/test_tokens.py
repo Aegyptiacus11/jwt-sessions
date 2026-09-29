@@ -3,7 +3,7 @@ from datetime import UTC, datetime, timedelta
 import jwt
 import pytest
 
-from tandem_auth import AccessTokens, InvalidToken
+from jwt_sessions import AccessTokens, InvalidToken
 from tests.conftest import SECRET
 
 
