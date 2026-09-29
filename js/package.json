@@ -1,0 +1,51 @@
+{
+  "name": "tandem-auth",
+  "version": "0.1.0-dev.0",
+  "description": "React client for tandem-auth: in-memory access tokens, a refresh token only the server's httpOnly cookie ever holds, renewal before expiry, and one refresh on a 401.",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tanstack-router": {
+      "types": "./dist/tanstack-router.d.ts",
+      "import": "./dist/tanstack-router.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts"
+  },
+  "peerDependencies": {
+    "@tanstack/react-router": ">=1.95",
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "@tanstack/react-router": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@tanstack/react-router": "^1.170.40",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "jsdom": "^30.1.1",
+    "prettier": "^3.9.9",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  },
+  "packageManager": "pnpm@11.15.1"
+}
