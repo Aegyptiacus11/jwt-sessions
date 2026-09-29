@@ -30,3 +30,15 @@ export function hasRole(session: Session, ...roles: string[]): boolean {
   if (!user) return false;
   return roles.some((role) => user.roles.includes(role));
 }
+
+/** A signed-out session that does nothing - the initial value a router's
+ * context needs before the provider's real session exists. */
+export const ANONYMOUS_SESSION: Session = {
+  status: "anonymous",
+  token: null,
+  user: null,
+  error: null,
+  signIn: async () => {},
+  signOut: async () => {},
+  signOutEverywhere: async () => {},
+};

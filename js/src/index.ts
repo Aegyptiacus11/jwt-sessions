@@ -1,6 +1,7 @@
 export { AuthProvider, type AuthConfig } from "./provider";
 export { useSession, SessionContext } from "./context";
 export {
+  ANONYMOUS_SESSION,
   hasRole,
   type Session,
   type SessionStatus,
