@@ -1,5 +1,7 @@
 # jwt-sessions
 
+[![PyPI](https://img.shields.io/pypi/v/jwt-sessions)](https://pypi.org/project/jwt-sessions/) [![Release](https://img.shields.io/github/v/release/Aegyptiacus11/jwt-sessions)](https://github.com/Aegyptiacus11/jwt-sessions/releases) [![CI](https://github.com/Aegyptiacus11/jwt-sessions/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Aegyptiacus11/jwt-sessions/actions/workflows/ci.yml) [![Python](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2FAegyptiacus11%2Fjwt-sessions%2Fmain%2Fpyproject.toml)](https://github.com/Aegyptiacus11/jwt-sessions/blob/main/pyproject.toml) [![License](https://img.shields.io/pypi/l/jwt-sessions)](https://github.com/Aegyptiacus11/jwt-sessions/blob/main/LICENSE)
+
 First-party authentication for FastAPI: email and password sign-in,
 short-lived access tokens, and refresh tokens that rotate on every use and
 give themselves away when stolen.
