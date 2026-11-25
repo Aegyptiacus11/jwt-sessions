@@ -28,6 +28,7 @@ jobs:
           set -euo pipefail
           .github/scripts/test-check-tag.sh
           .github/scripts/test-concurrency.sh
+          .github/scripts/test-github-release.sh
       - run: uv sync --locked
       - run: uv run --locked ruff format --check .
       - run: uv run --locked ruff check .
