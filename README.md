@@ -8,18 +8,17 @@ It is for applications that own their users and do not want an identity
 provider. Authorization - who may do what - is deliberately not here; it
 belongs to the application.
 
-> Status: pre-release (`0.1.0.dev0`), extracted from a production application;
-> the API may still change before 0.1.0. MIT licensed.
+> Status: 0.1.0, the first release, extracted from a production application; the
+> API may still change before 1.0. MIT licensed.
 
 ## Installing
 
-Not on PyPI - install from this repository, pinned to a commit:
-
 ```bash
-uv add "jwt-sessions[fastapi,sqlalchemy] @ git+https://github.com/Aegyptiacus11/jwt-sessions@<commit>"
+uv add "jwt-sessions[fastapi,sqlalchemy]"
 ```
 
-(`pip install` takes the same URL.)
+(or `pip install`, with the same argument). The extras are the FastAPI router and the
+SQLAlchemy refresh store.
 
 ## Using it
 

@@ -153,14 +153,16 @@ def auth_router(
         set_cookie(request, response, session.refresh_token)
         return AccessTokenResponse(access_token=session.access_token)
 
-    @router.post("/logout", status_code=status.HTTP_204_NO_CONTENT)
+    @router.post("/logout", status_code=status.HTTP_204_NO_CONTENT, response_model=None)
     async def logout(request: Request, response: Response) -> None:
         token = request.cookies.get(cookie.name)
         if token:
             await auth.logout(token)
         clear_cookie(request, response)
 
-    @router.post("/logout-all", status_code=status.HTTP_204_NO_CONTENT)
+    @router.post(
+        "/logout-all", status_code=status.HTTP_204_NO_CONTENT, response_model=None
+    )
     async def logout_all(
         request: Request,
         response: Response,
