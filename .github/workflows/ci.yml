@@ -1,15 +1,79 @@
-name: CI
+# Every push to main and every pull request: formatting, lint, the tests on the oldest and
+# newest Python and on the oldest dependencies pyproject.toml allows, and the package.
+name: ci
 
 on:
   push:
+    branches: [main]
+  pull_request:
+  workflow_call: # release.yml: nothing is published unless every job here passes
+
+permissions:
+  contents: read
+
+concurrency:
+  # github.workflow is "release" when release.yml calls this
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  python:
-    runs-on: ubuntu-latest
+  lint:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+      - name: The release's checks
+        run: |
+          set -euo pipefail
+          .github/scripts/test-check-tag.sh
+          .github/scripts/test-concurrency.sh
       - run: uv sync --locked
-      - run: uv run ruff format --check .
-      - run: uv run ruff check .
-      - run: uv run pytest -q
+      - run: uv run --locked ruff format --check .
+      - run: uv run --locked ruff check .
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.13", "3.14"]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    env:
+      UV_PYTHON: ${{ matrix.python }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+      - run: uv run --locked pytest -q
+
+  # The versions a user may have: the lowest pyproject.toml allows.
+  test-lowest:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+      - run: uv run --python 3.11 --resolution lowest-direct pytest -q
+
+  package:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+      - run: uv build --no-sources
+      - run: uvx twine@7.0.0 check --strict dist/*
+      - name: The wheel and the source archive work installed on their own
+        run: |
+          set -euo pipefail
+          for file in dist/*.whl dist/*.tar.gz; do
+            uv run --isolated --no-project --with "$file" python -c "import jwt_sessions"
+            uv run --isolated --no-project --with "$file[fastapi,sqlalchemy]" \
+              python -c "import jwt_sessions.fastapi, jwt_sessions.sqlalchemy_store"
+          done
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
